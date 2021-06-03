@@ -1,1 +1,2 @@
-# Spe-React-E01-todolist-v1-Guillaume-Debeire
+# To-do list
+Révisons nos fondamentaux de JavaScript, en créant une to-do list :D
