@@ -18,9 +18,9 @@ On est en spé maintenant, il va falloir essayer de trouver tout seul ce qu'il f
 Si vous réussissez ) faire les points 1 et 2, c'est déjà super ! Pour les points 3 et 4, c'est un peu plus coton.
 
 ## Charte graphique
-. Fond = `#2e5849`
-. Fond Input = `#1c382f`
-. Bordure Input = `#183129`
-. Ombre interne Input = `25px` `rgba(0,0,0,.1)`
-. Ombre internet Input Focus = `25px` `rgba(0,0,0,.5)`
-. Texte Input = `#fff`
+* Fond = `#2e5849`
+* Fond Input = `#1c382f`
+* Bordure Input = `#183129`
+* Ombre interne Input = `25px` `rgba(0,0,0,.1)`
+* Ombre internet Input Focus = `25px` `rgba(0,0,0,.5)`
+* Texte Input = `#fff`
