@@ -46,3 +46,20 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
+/* Reset perso */
+a, del, ins {
+    text-decoration: none;
+}
+a {
+    color: inherit;
+}
+label, button {
+    cursor: pointer;
+}
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+input, button {
+    outline: 0;
+}

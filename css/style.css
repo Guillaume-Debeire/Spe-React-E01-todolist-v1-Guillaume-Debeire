@@ -1,0 +1,50 @@
+body {
+    background-color: #2e5849;
+    color: white;
+}
+#todo {
+    width: 90%;
+    max-width: 700px;
+    margin: 2rem auto;
+}
+
+.form-field {
+    background-color: #1c382f;
+    border: 1px solid #183129;
+    box-shadow: inset 0 0 25px rgba(0,0,0,.1);
+    font-size: 1.5em;
+    padding: 1rem;
+    width: 100%;
+    color: white;
+    margin-bottom: 2rem;
+}
+
+.form-field::placeholder {
+    color: rgba(255, 255, 255, .5);
+}
+
+.form-field:focus {
+    box-shadow: inset 0 0 25px rgba(0,0,0,.5);
+}
+
+.counter {
+    font-size: 1.5em;
+    border-bottom: 1px solid white;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.list-item {
+    display: block;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    color: black;
+    padding: 1rem;
+    border-radius: 5px;
+    margin-bottom: 0.5em;
+}
+
+.list-item--off {
+    opacity: 50%;
+    text-decoration: line-through;
+}
