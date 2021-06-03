@@ -24,3 +24,8 @@ Si vous réussissez ) faire les points 1 et 2, c'est déjà super ! Pour les poi
 * Ombre interne Input = `25px` `rgba(0,0,0,.1)`
 * Ombre internet Input Focus = `25px` `rgba(0,0,0,.5)`
 * Texte Input = `#fff`
+* Placeholder Input = `rgba(255, 255, 255, .5)`
+* Fond Tâche = `#eee`
+* Bordure Tâche = `#ccc`
+
+## *Help!*
