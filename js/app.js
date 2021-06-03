@@ -22,6 +22,8 @@ const app = {
         const formElement = document.createElement('form');
         // Configurer l'élément
         formElement.className = 'form';
+        // Je place mon écouteur d'évenement
+        formElement.addEventListener('submit', app.handleFormSubmit);
         // formElement.setAttribute('class', 'form');
         // formElement.classList.add('form');
         // ajouter un enfant dans le parent
@@ -42,19 +44,35 @@ const app = {
     },
     createList: function () {
         // On créé l'élément
-        const listElement = document.createElement('ul');
+        app.listElement = document.createElement('ul');
         // Configurer l'élément
-        listElement.className = 'list';
-        app.todoElement.appendChild(listElement);
+        app.listElement.className = 'list';
+        app.todoElement.appendChild(app.listElement);
         for (let i = 0; i < 3; i++) {
-            app.createListItem(listElement);
+            app.createListItem(app.listElement);
         }
     },
     // reponsable de la structure d'un élément de la liste
     createListItem: function (parent) {
         const liElement = document.createElement('li');
         parent.appendChild(liElement);
+        const labelElement = document.createElement('label');
+        labelElement.className = 'list-item';
+        labelElement.textContent = 'truc bidon'
+        liElement.appendChild(labelElement);
+        const checkboxElement = document.createElement('input');
+        checkboxElement.type = 'checkbox';
+        labelElement.prepend(checkboxElement);
     },
+    // responsabilité de décrire quoi faire au submit
+    handleFormSubmit: function (event) {
+        // j'empêche le comportement par défaut
+        event.preventDefault();
+        // créer un nouveau li
+        app.createListItem(app.listElement);
+        // incrémenter le compteur
+        // vider le champ
+    }
 };
 
 
