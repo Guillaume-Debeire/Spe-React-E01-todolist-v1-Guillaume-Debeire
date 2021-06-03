@@ -29,3 +29,8 @@ Si vous réussissez ) faire les points 1 et 2, c'est déjà super ! Pour les poi
 * Bordure Tâche = `#ccc`
 
 ## *Help!*
+
+* https://developer.mozilla.org/fr/docs/Web/API/Document/getElementById
+* https://developer.mozilla.org/fr/docs/Web/API/EventTarget/addEventListener
+* https://developer.mozilla.org/fr/docs/Web/API/Document/createElement
+* https://developer.mozilla.org/fr/docs/Web/API/Node/textContent
