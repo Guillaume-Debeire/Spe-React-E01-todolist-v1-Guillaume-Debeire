@@ -2,7 +2,20 @@
  * Todolist
  */
 const app = {
-    
+    tasks: [
+        {
+            title: 'Faire une todolist en js',
+            done: true,
+        },
+        {
+            title: 'Faire une todolist avec React',
+            done: false,
+        },
+        {
+            title: 'Coder Facebook',
+            done: false,
+        },
+    ],
     init: function() {
         app.initElements();
         // Créer le formulaire
@@ -29,11 +42,11 @@ const app = {
         // ajouter un enfant dans le parent
         app.todoElement.appendChild(formElement);
         // création de l'input
-        const inputElement = document.createElement('input');
-        inputElement.className = 'form-field';
-        inputElement.setAttribute('type', 'text');
-        inputElement.setAttribute('placeholder', 'Ajouter une tâche');
-        formElement.appendChild(inputElement);
+        app.inputElement = document.createElement('input');
+        app.inputElement.className = 'form-field';
+        app.inputElement.setAttribute('type', 'text');
+        app.inputElement.setAttribute('placeholder', 'Ajouter une tâche');
+        formElement.appendChild(app.inputElement);
     },
     // responsable de la structure du compteur
     createCounter: function() {
@@ -48,30 +61,41 @@ const app = {
         // Configurer l'élément
         app.listElement.className = 'list';
         app.todoElement.appendChild(app.listElement);
-        for (let i = 0; i < 3; i++) {
-            app.createListItem(app.listElement);
-        }
+        // for (let i = 0; i < 3; i++) {
+        //     app.createListItem(app.listElement, app.tasks[i].title);
+        // }
+        app.tasks.forEach((currentTask) => {
+            app.createListItem(app.listElement, currentTask)
+        })
     },
     // reponsable de la structure d'un élément de la liste
-    createListItem: function (parent) {
+    createListItem: function (parent, task) {
         const liElement = document.createElement('li');
         parent.appendChild(liElement);
         const labelElement = document.createElement('label');
         labelElement.className = 'list-item';
-        labelElement.textContent = 'truc bidon'
+        labelElement.textContent = task.title;
         liElement.appendChild(labelElement);
         const checkboxElement = document.createElement('input');
         checkboxElement.type = 'checkbox';
         labelElement.prepend(checkboxElement);
+        if (task.done) {
+            labelElement.classList.add('list-item--off');
+            checkboxElement.checked = true;
+        }
     },
     // responsabilité de décrire quoi faire au submit
     handleFormSubmit: function (event) {
         // j'empêche le comportement par défaut
         event.preventDefault();
         // créer un nouveau li
-        app.createListItem(app.listElement);
-        // incrémenter le compteur
+        app.createListItem(app.listElement, {
+            title: app.inputElement.value,
+            done: false,
+        });
         // vider le champ
+        app.inputElement.value = '';
+        // incrémenter le compteur
     }
 };
 
