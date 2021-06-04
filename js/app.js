@@ -16,6 +16,7 @@ const app = {
             done: false,
         },
     ],
+    counter: 2,
     init: function() {
         app.initElements();
         // Créer le formulaire
@@ -50,10 +51,10 @@ const app = {
     },
     // responsable de la structure du compteur
     createCounter: function() {
-        const h1element = document.createElement('h1');
-        h1element.className = 'counter';
-        h1element.textContent = '2 tâches en cours';
-        app.todoElement.appendChild(h1element);
+        app.h1element = document.createElement('h1');
+        app.h1element.className = 'counter';
+        app.h1element.textContent = '2 tâches en cours';
+        app.todoElement.appendChild(app.h1element);
     },
     createList: function () {
         // On créé l'élément
@@ -82,6 +83,12 @@ const app = {
             // https://developer.mozilla.org/fr/docs/Web/API/Element/classList
             // toggle ajoute la classe si elle n'est pas présente et la supprime si elle est présente.
             labelElement.classList.toggle('list-item--off');
+            if (checkboxElement.checked) {
+                app.counter--; 
+            } else {
+                app.counter++;
+            }
+            app.setCounterValue();
         });
         labelElement.prepend(checkboxElement);
         if (task.done) {
@@ -101,7 +108,19 @@ const app = {
         // vider le champ
         app.inputElement.value = '';
         // incrémenter le compteur
-    }
+        app.counter++;
+        app.setCounterValue();
+    },
+    // change la valeur affichée dans le counter
+    setCounterValue: function() {
+        if (app.counter === 0) {
+            app.h1element.textContent = `Aucune tâche en cours`
+        } else if (app.counter === 1) {
+            app.h1element.textContent = `Une tâche en cours`
+        } else {
+            app.h1element.textContent = `${app.counter} tâches en cours`
+        }
+    },
 };
 
 
