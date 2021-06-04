@@ -78,6 +78,11 @@ const app = {
         liElement.appendChild(labelElement);
         const checkboxElement = document.createElement('input');
         checkboxElement.type = 'checkbox';
+        checkboxElement.addEventListener('change', () => {
+            // https://developer.mozilla.org/fr/docs/Web/API/Element/classList
+            // toggle ajoute la classe si elle n'est pas présente et la supprime si elle est présente.
+            labelElement.classList.toggle('list-item--off');
+        });
         labelElement.prepend(checkboxElement);
         if (task.done) {
             labelElement.classList.add('list-item--off');
