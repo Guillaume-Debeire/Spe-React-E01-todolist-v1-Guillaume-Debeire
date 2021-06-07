@@ -5,10 +5,10 @@
 const app = {
     // je prépare une donnée brute qui représente l'état de mon application, la source de vérité qui détermine ce qui sera affiché dans l'application
     state: [
-        {
-            title: 'Faire une todolist en js',
-            done: true,
-        },
+        // {
+        //     title: 'Faire une todolist en js',
+        //     done: true,
+        // },
     ],
     // décrit comment créer l'interface utilisateur
     init: function() {
@@ -70,20 +70,21 @@ const app = {
         })
     },
     // reponsable de la structure d'un élément de la liste
-    createListItem: function (parent, { title, done }) {
+    createListItem: function (parent, task) {
         const liElement = document.createElement('li');
         parent.appendChild(liElement);
         const labelElement = document.createElement('label');
         labelElement.className = 'list-item';
-        labelElement.textContent = title;
+        labelElement.textContent = task.title;
         liElement.appendChild(labelElement);
         const checkboxElement = document.createElement('input');
         checkboxElement.type = 'checkbox';
         checkboxElement.addEventListener('change', () => {
-           
+           task.done = !task.done;
+           app.init();
         });
         labelElement.prepend(checkboxElement);
-        if (done) {
+        if (task.done) {
             labelElement.classList.add('list-item--off');
             checkboxElement.checked = true;
         }
@@ -93,14 +94,12 @@ const app = {
         // j'empêche le comportement par défaut
         event.preventDefault();
         // dorénavant, lorsque j'ai besoin de modifier ce qui s'affiche dans l'application, je vais modifier l'état de l'application dans un premier temps, c'est ma source de vérité, c'est de là que doit partir la représentation de mon application
-        console.log(app.state)
         app.state.push({
             title: app.inputElement.value,
             done: false,
         });
         // après modification de l'état, je regénère l'interface
         app.init();
-        console.log(app.state)
         // vider le champ
         app.inputElement.value = '';
     },
