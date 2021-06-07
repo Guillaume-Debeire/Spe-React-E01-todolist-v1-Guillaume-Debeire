@@ -29,3 +29,5 @@ Impératif
 On garde quoi ? Le meilleur des deux mondes. Il nous faudrait un outil pour faire du déclaratif en restant performant.
 
 **REACT.**
+
+React avec React-Dom vont nous permettre de continuer avec cette approche déclarative, tout en s'occupant de recalculer ce qui doit l'être dans l'ui quand l'état de l'application change, mais de manière perfomante.
