@@ -1,30 +1,30 @@
 /**
  * Todolist
  */
+
 const app = {
-    tasks: [
+    // je prépare une donnée brute qui représente l'état de mon application, la source de vérité qui détermine ce qui sera affiché dans l'application
+    state: [
         {
             title: 'Faire une todolist en js',
             done: true,
         },
-        {
-            title: 'Faire une todolist avec React',
-            done: false,
-        },
-        {
-            title: 'Coder Facebook',
-            done: false,
-        },
     ],
-    counter: 2,
+    // décrit comment créer l'interface utilisateur
     init: function() {
         app.initElements();
+        // vider l'interface
+        app.clean();
         // Créer le formulaire
         app.createForm();
         // Créer le compteur
         app.createCounter();
         // Créer la liste
         app.createList();
+    },
+    // supprime ce qu'il y a dans l'UI
+    clean: function() {
+        app.todoElement.innerHTML = '';
     },
     // mémoriser en propriété de app des elements auquels je vais accéder un peu partoutézeg 
     initElements: function() {
@@ -53,7 +53,7 @@ const app = {
     createCounter: function() {
         app.h1element = document.createElement('h1');
         app.h1element.className = 'counter';
-        app.h1element.textContent = '2 tâches en cours';
+        app.setCounterValue();
         app.todoElement.appendChild(app.h1element);
     },
     createList: function () {
@@ -65,33 +65,25 @@ const app = {
         // for (let i = 0; i < 3; i++) {
         //     app.createListItem(app.listElement, app.tasks[i].title);
         // }
-        app.tasks.forEach((currentTask) => {
+        app.state.forEach((currentTask) => {
             app.createListItem(app.listElement, currentTask)
         })
     },
     // reponsable de la structure d'un élément de la liste
-    createListItem: function (parent, task) {
+    createListItem: function (parent, { title, done }) {
         const liElement = document.createElement('li');
         parent.appendChild(liElement);
         const labelElement = document.createElement('label');
         labelElement.className = 'list-item';
-        labelElement.textContent = task.title;
+        labelElement.textContent = title;
         liElement.appendChild(labelElement);
         const checkboxElement = document.createElement('input');
         checkboxElement.type = 'checkbox';
         checkboxElement.addEventListener('change', () => {
-            // https://developer.mozilla.org/fr/docs/Web/API/Element/classList
-            // toggle ajoute la classe si elle n'est pas présente et la supprime si elle est présente.
-            labelElement.classList.toggle('list-item--off');
-            if (checkboxElement.checked) {
-                app.counter--; 
-            } else {
-                app.counter++;
-            }
-            app.setCounterValue();
+           
         });
         labelElement.prepend(checkboxElement);
-        if (task.done) {
+        if (done) {
             labelElement.classList.add('list-item--off');
             checkboxElement.checked = true;
         }
@@ -100,25 +92,29 @@ const app = {
     handleFormSubmit: function (event) {
         // j'empêche le comportement par défaut
         event.preventDefault();
-        // créer un nouveau li
-        app.createListItem(app.listElement, {
+        // dorénavant, lorsque j'ai besoin de modifier ce qui s'affiche dans l'application, je vais modifier l'état de l'application dans un premier temps, c'est ma source de vérité, c'est de là que doit partir la représentation de mon application
+        console.log(app.state)
+        app.state.push({
             title: app.inputElement.value,
             done: false,
         });
+        // après modification de l'état, je regénère l'interface
+        app.init();
+        console.log(app.state)
         // vider le champ
         app.inputElement.value = '';
-        // incrémenter le compteur
-        app.counter++;
-        app.setCounterValue();
     },
     // change la valeur affichée dans le counter
     setCounterValue: function() {
-        if (app.counter === 0) {
+        const undoneTasks = app.state.filter((task) => !task.done);
+        const counter = undoneTasks.length;
+        console.log(counter)
+        if (counter === 0) {
             app.h1element.textContent = `Aucune tâche en cours`
-        } else if (app.counter === 1) {
+        } else if (counter === 1) {
             app.h1element.textContent = `Une tâche en cours`
         } else {
-            app.h1element.textContent = `${app.counter} tâches en cours`
+            app.h1element.textContent = `${counter} tâches en cours`
         }
     },
 };
